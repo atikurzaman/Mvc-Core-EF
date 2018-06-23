@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 namespace Application.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProductAttributeController : Controller
+    public class ProductAttributeController : BaseController
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;

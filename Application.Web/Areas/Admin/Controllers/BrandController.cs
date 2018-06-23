@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 namespace Application.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BrandController : Controller
+    public class BrandController : BaseController
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
