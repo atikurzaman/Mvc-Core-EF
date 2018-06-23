@@ -14,10 +14,26 @@
             </div>
         </div>
         <div class="form-group">
+            <label asp-for="Label" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <input asp-for="Label" class="form-control" />
+                <span asp-validation-for="Label" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Type" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <select asp-for="Type" asp-items="@Model.AttributeDisplayTypes" class="form-control">
+                    <option value="">----Select----</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label asp-for="OrderBy" class="col-lg-3 col-sm-3 control-label"></label>
             <div class="col-lg-6">
-                <input asp-for="OrderBy" class="form-control" />
-                <span asp-validation-for="OrderBy" class="text-danger"></span>
+                <select asp-for="OrderBy" asp-items="@Model.ProductAttributeOrderTypes" class="form-control">
+                    <option value="">----Select----</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -28,7 +44,7 @@
                 </label>
             </div>
         </div>
-        </div>
+    </div>
     @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
 </form>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
