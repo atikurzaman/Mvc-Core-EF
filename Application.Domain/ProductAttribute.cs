@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Application.Domain
 {
-    public class ProductAttribute
+    public class ProductAttribute: BaseEntity
     {
-        public Int64 Id { get; set; }
-
         public string Name { get; set; }      
 
         public string OrderBy { get; set; }

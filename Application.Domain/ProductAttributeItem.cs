@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Application.Domain
 {
-    public class ProductAttributeItem
+    public class ProductAttributeItem : BaseEntity
     {
-        public Int64 Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }

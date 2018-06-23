@@ -11,7 +11,7 @@ namespace Application.Data.EntityConfiguration
             builder.Property(c=>c.Id).ValueGeneratedOnAdd();
             builder.Property(c =>c.Name).HasMaxLength(128).IsRequired();
             builder.Property(c => c.OrderBy).HasMaxLength(128).IsRequired();
-            builder.Property(c => c.Status).IsRequired().HasDefaultValue(false);
+            builder.Property(c => c.Status).IsRequired().HasDefaultValue(true);
             builder.ToTable("ProductAttribute");            
         }
     }

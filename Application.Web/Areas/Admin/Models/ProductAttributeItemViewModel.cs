@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Web.Areas.Admin.Models
 {
-    public class ProductAttributeItemViewModel
-    {
-        public Int64 Id { get; set; }
+    public class ProductAttributeItemViewModel:BaseEntityViewModel
+    {        
 
         [Required,MaxLength(128)]
         public string Name { get; set; }

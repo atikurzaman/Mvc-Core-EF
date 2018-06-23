@@ -42,6 +42,9 @@
     <Content Update="Areas\Admin\Views\Category\_DeleteCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Areas\Admin\Views\ProductAttribute\_DeleteProductAttribute.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Areas\Admin\Views\Shared\_GentelellaAdmin.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
