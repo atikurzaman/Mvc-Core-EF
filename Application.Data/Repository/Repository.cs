@@ -43,7 +43,11 @@ namespace Application.Data.Repository
         public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken))
         {
             return await _entities.AsNoTracking().Where(predicate).ToListAsync(cancellationToken);            
-        }        
+        }
+        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
+        {
+            return _entities.AsNoTracking().Where(predicate).ToList();
+        }
         public async Task<TEntity> GetAsync(Int64 id)
         {
             return await _context.Set<TEntity>().FindAsync(id);

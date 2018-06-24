@@ -10,7 +10,8 @@ namespace Application.Data.Repository
     {        
         Task<TEntity> GetAsync(Int64 id);        
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default(CancellationToken));        
-        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));        
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));
+        IEnumerable<TEntity> Find(Func<TEntity,bool> predicate);
         Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken));        
         Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken));        
         Task<TEntity> DeleteAsync(Int64 id, CancellationToken cancellationToken=default(CancellationToken));              

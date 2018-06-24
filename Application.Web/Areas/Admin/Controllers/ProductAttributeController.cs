@@ -20,7 +20,7 @@ namespace Application.Web.Areas.Admin.Controllers
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
-        public ProductAttributeController(IUnitOfWork uow, IMapper mapper, ILogger<CategoryController> logger)
+        public ProductAttributeController(IUnitOfWork uow, IMapper mapper, ILogger<ProductAttributeController> logger)
         {
             _uow = uow;
             _mapper = mapper;

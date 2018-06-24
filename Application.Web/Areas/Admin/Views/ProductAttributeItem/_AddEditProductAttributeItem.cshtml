@@ -1,0 +1,38 @@
+﻿@model Application.Web.Areas.Admin.Models.ProductAttributeItemViewModel
+@using Application.Web.Common
+
+
+<form asp-action="AddEditProductAttributeItem">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = String.Format("{0} Product Attribute Item", @Model.Id == 0 ? "Add" : "Edit") })
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="modal-body form-horizontal">
+        <div class="form-group">
+            <label asp-for="Name" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="col-lg-6">
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Status" class="col-lg-3 col-sm-3 control-label"></label>
+            <div class="checkbox col-lg-6">
+                <label>
+                    <input asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                </label>
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.ProductAttributeId)
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
+    </div>
+</form>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
