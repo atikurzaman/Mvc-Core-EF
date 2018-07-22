@@ -25,10 +25,6 @@ namespace Application.Web.Areas.Admin.Components
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //IEnumerable<Menu> menus = await _uow.Menus.GetAllAsync();
-            //var menuViewModels = _mapper.Map<IEnumerable<MenuViewModel>>(menus);
-            //return View("Menu",menuViewModels);
-
             IEnumerable<Menu> allMenu = await _uow.Menus.GetAllAsync();
 
             List<Menu> menus = allMenu.Where(e => e.ParentId == null) /* grab only the root parent nodes */
@@ -57,6 +53,10 @@ namespace Application.Web.Areas.Admin.Components
                 {
                     Id = e.Id,
                     Name = e.Name,
+                    ControllerName = e.ControllerName,
+                    ActionName = e.ActionName,
+                    CssClass = e.CssClass,
+                    IsActive = e.IsActive,
                     ParentId = e.ParentId,
                     Children = GetChildren(menus, e.Id)
                 }).ToList();
