@@ -39,28 +39,20 @@
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="MenuArea" class="col-lg-3 col-sm-3 control-label"></label>
+            <label asp-for="CssClass" class="col-lg-3 col-sm-3 control-label"></label>
             <div class="col-lg-6">
-                <input asp-for="MenuArea" class="form-control" />
-                <span asp-validation-for="MenuArea" class="text-danger"></span>
+                <input asp-for="CssClass" class="form-control" />
+                <span asp-validation-for="CssClass" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Disable" class="col-lg-3 col-sm-3 control-label"></label>
+            <label asp-for="IsActive" class="col-lg-3 col-sm-3 control-label"></label>
             <div class="checkbox col-lg-6">
                 <label>
-                    <input asp-for="Disable" /> @Html.DisplayNameFor(model => model.Disable)
+                    <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
                 </label>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="HasAccess" class="col-lg-3 col-sm-3 control-label"></label>
-            <div class="checkbox col-lg-6">
-                <label>
-                    <input asp-for="HasAccess" /> @Html.DisplayNameFor(model => model.HasAccess)
-                </label>
-            </div>
-        </div>
+        </div>        
     </div>
     @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
 </form>

@@ -37,8 +37,8 @@ namespace Application.Data
             builder.ApplyConfiguration(new MenuConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new BrandConfiguration());
-            builder.ApplyConfiguration(new ProductAttributeConfiguration());
-            builder.ApplyConfiguration(new ProductAttributeItemConfiguration());
+            builder.ApplyConfiguration(new AttributeConfiguration());
+            builder.ApplyConfiguration(new AttributeValueConfiguration());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

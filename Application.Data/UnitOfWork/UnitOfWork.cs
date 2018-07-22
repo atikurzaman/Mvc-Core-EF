@@ -52,27 +52,27 @@ namespace Application.Data.UnitOfWork
             }
         }
 
-        private IProductAttributeRepository _productAttribute;
-        public IProductAttributeRepository ProductAttributes
+        private IAttributeRepository _productAttribute;
+        public IAttributeRepository Attributes
         {
             get
             {
                 if (_productAttribute == null)
                 {
-                    _productAttribute = new ProductAttributeRepository(context);
+                    _productAttribute = new AttributeRepository(context);
                 }
                 return _productAttribute;
             }
         }
 
-        private IProductAttributeItemRepository _productAttributeItem;
-        public IProductAttributeItemRepository ProductAttributeItems
+        private IAttributeValueRepository _productAttributeItem;
+        public IAttributeValueRepository AttributeValues
         {
             get
             {
                 if (_productAttributeItem == null)
                 {
-                    _productAttributeItem = new ProductAttributeItemRepository(context);
+                    _productAttributeItem = new AttributeValueRepository(context);
                 }
                 return _productAttributeItem;
             }

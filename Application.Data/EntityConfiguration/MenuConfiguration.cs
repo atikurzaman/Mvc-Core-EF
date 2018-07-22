@@ -15,9 +15,8 @@ namespace Application.Data.EntityConfiguration
             builder.Property(m => m.Name).HasMaxLength(256).IsRequired();
             builder.Property(m => m.ControllerName).HasMaxLength(256).IsRequired();
             builder.Property(m => m.ActionName).HasMaxLength(256).IsRequired();
-            builder.Property(m => m.MenuArea).HasMaxLength(256);
-            builder.Property(m => m.Disable);
-            builder.Property(m => m.HasAccess);
+            builder.Property(m => m.CssClass).HasMaxLength(256);
+            builder.Property(m => m.IsActive);            
             builder.Property(m => m.ParentId);
             builder.HasKey(m => m.Id);
             builder.ToTable("Menu");

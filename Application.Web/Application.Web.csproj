@@ -19,6 +19,10 @@
     <None Include="Areas\Admin\Views\Shared\_Admin.cshtml" />
     <None Include="Areas\Admin\Views\_ViewImports.cshtml" />
     <None Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\images\banner1.svg" />
+    <None Include="wwwroot\images\banner2.svg" />
+    <None Include="wwwroot\images\banner3.svg" />
+    <None Include="wwwroot\images\banner4.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +49,7 @@
     <Content Update="Areas\Admin\Views\Category\_DeleteCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Areas\Admin\Views\ProductAttribute\_DeleteProductAttribute.cshtml">
+    <Content Update="Areas\Admin\Views\Attribute\_DeleteAttribute.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Areas\Admin\Views\Shared\_GentelellaAdmin.cshtml">

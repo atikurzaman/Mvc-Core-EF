@@ -9,7 +9,9 @@ namespace Application.Data.Repository
 {
     public interface IMenuRepository:IRepository<Menu>
     {
-        List<Menu>  GetMenuWithParentName();
+        List<Menu>  GetMenuWithParentName();        
         IEnumerable<Menu> MenuSelectList();
+        List<Menu> GetAllParentMenu();
+        List<Menu> GetAllMenu();
     }
 }

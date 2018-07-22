@@ -37,6 +37,13 @@ namespace Application.Web.Areas.Admin.Controllers
             return View(menuModel);
         }
 
+        //public IActionResult GetMenus()
+        //{
+        //    IEnumerable<Menu> menus = _uow.Menus.GetMenuWithParentName();
+        //    var menuViewModels = _mapper.Map<IEnumerable<MenuViewModel>>(menus);
+        //    return PartialView("~/Areas/Admin/Views/Menu/_Menus.cshtml", menuViewModels);
+        //}
+
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null)

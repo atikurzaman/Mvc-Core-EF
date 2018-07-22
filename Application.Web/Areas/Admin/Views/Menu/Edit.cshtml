@@ -38,24 +38,17 @@
                 <span asp-validation-for="ControllerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MenuArea" class="control-label"></label>
-                <input asp-for="MenuArea" class="form-control" />
-                <span asp-validation-for="MenuArea" class="text-danger"></span>
+                <label asp-for="CssClass" class="control-label"></label>
+                <input asp-for="CssClass" class="form-control" />
+                <span asp-validation-for="CssClass" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="Disable" /> @Html.DisplayNameFor(model => model.Disable)
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
                     </label>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="HasAccess" /> @Html.DisplayNameFor(model => model.HasAccess)
-                    </label>
-                </div>
-            </div>
+            </div>            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-primary" role="button" aria-pressed="true">Back To Index</a>

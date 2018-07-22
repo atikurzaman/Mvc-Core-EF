@@ -21,20 +21,16 @@ namespace Application.Web.Areas.Admin.Models
 
         [Required,DisplayName("Action Name")]
         public string ActionName { get; set; }
-
-        [DisplayName("Menu Area")]
-        public string MenuArea { get; set; }
-        public Boolean Disable { get; set; }
-
-        [DisplayName("Has Access")]
-        public Boolean HasAccess { get; set; }
+        public string CssClass { get; set; }
+        public Boolean IsActive { get; set; }
 
         [DisplayName("Parent Menu")]
         public Int64? ParentId { get; set; } = null;
-        public virtual Menu ParentMenu { get; set; }
+        public virtual MenuViewModel ChildMenu { get; set; }
         public SelectList MenuSelectList { get; set; }
 
         [DisplayName("Parent Menu Name")]
-        public string ParentMenuName { get; set; }
+        public string ParentMenuName { get; set; }        
+        public List<MenuViewModel> Children { get; set; }
     }
 }

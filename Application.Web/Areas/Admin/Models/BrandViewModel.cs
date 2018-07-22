@@ -12,6 +12,6 @@ namespace Application.Web.Areas.Admin.Models
         public string Name { get; set; }
 
         [Required]
-        public bool Status { get; set; }
+        public bool IsActive { get; set; }
     }
 }

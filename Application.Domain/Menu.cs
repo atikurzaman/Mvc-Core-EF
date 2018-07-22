@@ -8,23 +8,17 @@ namespace Application.Domain
 {
     public class Menu
     {        
-        public Int64 Id { get; set; }
-        
-        public string Name { get; set; }
-        
-        public string ControllerName { get; set; }
-        
+        public Int64 Id { get; set; }        
+        public string Name { get; set; }        
+        public string ControllerName { get; set; }        
         public string ActionName { get; set; }
-        
-        public string MenuArea { get; set; }
-        
-        public Boolean Disable { get; set; }
-        
-        public Boolean HasAccess { get; set; }
+        public string CssClass { get; set; }
+        public Boolean IsActive { get; set; }
 
         [ForeignKey(nameof(ParentMenu))]
         public Int64? ParentId { get; set; }
-        public Menu ParentMenu { get; set; }        
+        public Menu ParentMenu { get; set; }
+        public List<Menu> Children { get; set; }
 
         [NotMapped]
         public string ParentMenuName { get; set; }

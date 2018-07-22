@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Application.Web.Areas.Admin.Models.MenuViewModel>
+@using Application.Web.Common
+@using System.Collections
+@using System.Text
+
+@functions {
+
+    public string ShowTree(IEnumerable<Application.Web.Areas.Admin.Models.MenuViewModel> menus)
+    {
+        StringBuilder output = new StringBuilder();
+
+        foreach (var item in menus)
+        {
+            if (item.Children != null && item.Children.Any())
+            {
+                item.CssClass = "dropdown - submenu";
+                output.Append($"<li class='{item.CssClass}'>");
+                output.Append(item.Name);
+            }
+            else
+            {
+                item.CssClass = "";
+                output.Append($"<li class='{item.CssClass}'>");
+                output.Append(item.Name);
+            }
+            if (item.Children != null && item.Children.Any())
+            {
+                item.CssClass = "dropdown - submenu";
+                output.Append($"<ul class='{item.CssClass}'>");
+                output.Append(item.Name);
+                ShowTree(item.Children);
+                output.Append("</ul>");
+            }
+            output.Append(item.Name);
+            output.Append("</li>");
+
+        }
+
+        return output.ToString();
+    }
+}
+
+@Html.Raw(ShowTree(Model))

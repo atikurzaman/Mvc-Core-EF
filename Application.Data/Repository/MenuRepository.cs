@@ -41,9 +41,8 @@ namespace Application.Data.Repository
                 Name = m.Name,
                 ControllerName = m.ControllerName,
                 ActionName = m.ActionName,
-                MenuArea = m.MenuArea,
-                HasAccess = m.HasAccess,
-                Disable =m.Disable,
+                CssClass = m.CssClass,                
+                IsActive =m.IsActive,
                 ParentId = m.ParentId,
                 ParentMenuName = string.Empty
             }).ToList();
@@ -79,6 +78,17 @@ namespace Application.Data.Repository
                 parentMenuName = ApplicationDbContext.Menus.Where(p => p.Id == result.ParentId).Select(pm => pm.Name).FirstOrDefault();
             }
             return parentMenuName;
+        }
+
+        public List<Menu> GetAllParentMenu()
+        {
+            return ApplicationDbContext.Menus.Where(m => m.ParentId == null).ToList();
+        }
+
+        public List<Menu> GetAllMenu()
+        {
+            var menus = ApplicationDbContext.Menus.ToList();
+            return menus;
         }
     }
 }

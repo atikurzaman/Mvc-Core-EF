@@ -19,6 +19,72 @@ namespace Application.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Application.Domain.Attribute", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("IPAddress")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("MacAddress")
+                        .HasMaxLength(256);
+
+                    b.Property<long?>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attribute");
+                });
+
+            modelBuilder.Entity("Application.Domain.AttributeValue", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AttributeId");
+
+                    b.Property<long>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("IPAddress")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("MacAddress")
+                        .HasMaxLength(256);
+
+                    b.Property<long?>("ModifiedBy");
+
+                    b.Property<DateTime?>("ModifiedDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributeId");
+
+                    b.ToTable("AttributeValue");
+                });
+
             modelBuilder.Entity("Application.Domain.Brand", b =>
                 {
                     b.Property<long>("Id")
@@ -32,6 +98,8 @@ namespace Application.Data.Migrations
                     b.Property<string>("IPAddress")
                         .HasMaxLength(256);
 
+                    b.Property<bool>("IsActive");
+
                     b.Property<string>("MacAddress")
                         .HasMaxLength(256);
 
@@ -42,8 +110,6 @@ namespace Application.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256);
-
-                    b.Property<bool>("Status");
 
                     b.HasKey("Id");
 
@@ -283,12 +349,10 @@ namespace Application.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(256);
 
-                    b.Property<bool>("Disable");
-
-                    b.Property<bool>("HasAccess");
-
-                    b.Property<string>("MenuArea")
+                    b.Property<string>("CssClass")
                         .HasMaxLength(256);
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -303,86 +367,12 @@ namespace Application.Data.Migrations
                     b.ToTable("Menu");
                 });
 
-            modelBuilder.Entity("Application.Domain.ProductAttribute", b =>
+            modelBuilder.Entity("Application.Domain.AttributeValue", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("IPAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Label")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<string>("MacAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<int>("OrderBy")
-                        .HasMaxLength(128);
-
-                    b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
-
-                    b.Property<int>("Type");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductAttribute");
-                });
-
-            modelBuilder.Entity("Application.Domain.ProductAttributeItem", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1024);
-
-                    b.Property<string>("IPAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("MacAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<long>("ProductAttributeId");
-
-                    b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductAttributeId");
-
-                    b.ToTable("ProductAttributeItem");
+                    b.HasOne("Application.Domain.Attribute", "Attribute")
+                        .WithMany("AttributeValues")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Application.Domain.Category", b =>
@@ -448,16 +438,8 @@ namespace Application.Data.Migrations
             modelBuilder.Entity("Application.Domain.Menu", b =>
                 {
                     b.HasOne("Application.Domain.Menu", "ParentMenu")
-                        .WithMany()
+                        .WithMany("Children")
                         .HasForeignKey("ParentId");
-                });
-
-            modelBuilder.Entity("Application.Domain.ProductAttributeItem", b =>
-                {
-                    b.HasOne("Application.Domain.ProductAttribute", "ProductAttribute")
-                        .WithMany("ProductAttributeItems")
-                        .HasForeignKey("ProductAttributeId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

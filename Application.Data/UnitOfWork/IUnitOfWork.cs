@@ -11,8 +11,8 @@ namespace Application.Data.UnitOfWork
         ICategoryRepository Categories { get;}
         IMenuRepository Menus { get; }
         IBrandRepository Brands { get; }
-        IProductAttributeRepository ProductAttributes { get; }
-        IProductAttributeItemRepository ProductAttributeItems { get; }
+        IAttributeRepository Attributes { get; }
+        IAttributeValueRepository AttributeValues { get; }
 
         int Complete();
         Task<int> CompleteAsync();

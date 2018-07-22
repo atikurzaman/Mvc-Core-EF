@@ -13,6 +13,7 @@ namespace Application.Data.EntityConfiguration
         {
             builder.Property(b => b.Id).ValueGeneratedOnAdd();
             builder.Property(b => b.Name).HasMaxLength(256).IsRequired();
+            builder.Property(b => b.IsActive).IsRequired();
             builder.ToTable("Brand");
         }
     }
