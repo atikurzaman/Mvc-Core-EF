@@ -10,17 +10,21 @@ using System.Threading.Tasks;
 namespace Application.Web.Areas.Admin.Models
 {
     public class CategoryViewModel:BaseEntityViewModel
-    {       
+    {        
 
-        [Required,MaxLength(256)]
+        [Required, DisplayName("Name")]
         public string Name { get; set; }
+        public string Slug { get; set; }
+        public string Description { get; set; }
+        public Boolean IsActive { get; set; }
 
         [DisplayName("Parent Category")]
-        public Int64? ParentCategoryId { get; set; }
-        public virtual Category ParentCategory { get; set; }
+        public Int64? ParentId { get; set; } = null;
+        public CategoryViewModel ChildCategory { get; set; }
         public SelectList CategorySelectList { get; set; }
 
-        [DisplayName("Parent Category")]
+        [DisplayName("Parent Category Name")]
         public string ParentCategoryName { get; set; }
+        public List<CategoryViewModel> Children { get; set; }
     }
 }

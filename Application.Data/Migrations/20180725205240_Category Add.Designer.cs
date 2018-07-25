@@ -4,14 +4,16 @@ using Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180725205240_Category Add")]
+    partial class CategoryAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,9 +128,6 @@ namespace Application.Data.Migrations
 
                     b.Property<DateTime>("CreatedDate");
 
-                    b.Property<string>("Description")
-                        .HasMaxLength(256);
-
                     b.Property<string>("IPAddress")
                         .HasMaxLength(256);
 
@@ -146,9 +145,6 @@ namespace Application.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<long?>("ParentId");
-
-                    b.Property<string>("Slug")
-                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 

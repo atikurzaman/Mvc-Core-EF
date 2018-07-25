@@ -24,25 +24,7 @@
                     </th>                   
                     <th>
                         @Html.DisplayNameFor(model => model.ParentCategoryName)
-                    </th>                    
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreatedDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ModifiedDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreatedBy)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ModifiedBy)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IPAddress)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MacAddress)
-                    </th>                    
+                    </th>             
                 </tr>
             </thead>
             <tbody>
@@ -54,25 +36,7 @@
                     </td>                    
                     <td>
                         @Html.DisplayFor(modelItem => item.ParentCategoryName)
-                    </td>                    
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IPAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MacAddress)
-                    </td>                    
+                    </td>          
                     <td>
                         <a id="editCategoryModal" data-toggle="modal" asp-action="AddEditCategory" asp-route-id="@item.Id" data-target="#modal-action-category"
                            class="btn btn-info">
@@ -88,7 +52,7 @@
         </table>
     </div>
 </div>
-@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-category", AreaLabeledId = "modal-action-category-label", Size = ModalSize.Medium })
+@await Html.PartialAsync("_Modal", new BootstrapModel { ID = "modal-action-category", AreaLabeledId = "modal-action-category-label", Size = ModalSize.Medium })
 @section scripts
     {
     <script src="~/js/AdminJs/category-index.js" asp-append-version="true"></script>

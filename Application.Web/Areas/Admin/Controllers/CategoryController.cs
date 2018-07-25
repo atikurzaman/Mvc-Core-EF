@@ -49,7 +49,7 @@ namespace Application.Web.Areas.Admin.Controllers
 
                 var categoryModel = _mapper.Map<CategoryViewModel>(category);
                 categoryViewModel = categoryModel;
-                categoryViewModel.CategorySelectList = new SelectList(_uow.Categories.CategorySelectList(), "Id", "Name", categoryModel.ParentCategoryId);
+                categoryViewModel.CategorySelectList = new SelectList(_uow.Categories.CategorySelectList(), "Id", "Name", categoryModel.ParentId);
             }
             else
             {

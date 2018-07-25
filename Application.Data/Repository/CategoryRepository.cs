@@ -35,7 +35,7 @@ namespace Application.Data.Repository
             {
                 Name = m.Name,
                 Id = m.Id,
-                ParentCategoryId = m.ParentCategoryId
+                ParentId = m.ParentId
             }).ToList();
 
             return categories;
@@ -47,20 +47,23 @@ namespace Application.Data.Repository
             var categories = ApplicationDbContext.Categories.Select(c => new Category
             {
                 Id = c.Id,
-                Name = c.Name,                              
+                Name = c.Name,
+                Slug = c.Slug,
+                Description = c.Description,
+                IsActive =c.IsActive,
+                ParentId = c.ParentId,
+                ParentCategoryName = string.Empty,
                 CreatedDate = c.CreatedDate,
                 ModifiedDate = c.ModifiedDate,
                 CreatedBy = c.CreatedBy,
                 ModifiedBy = c.ModifiedBy,
                 IPAddress = c.IPAddress,
-                MacAddress = c.MacAddress,
-                ParentCategoryId = c.ParentCategoryId,
-                ParentCategoryName = string.Empty
+                MacAddress = c.MacAddress                
             }).ToList();
 
             foreach (var category in categories)
             {
-                var parentCategoryName = GetParentCategoryName(category.ParentCategoryId);
+                var parentCategoryName = GetParentCategoryName(category.ParentId);
                 if (parentCategoryName != null)
                 {
                     category.ParentCategoryName = parentCategoryName;
@@ -78,7 +81,7 @@ namespace Application.Data.Repository
         private string GetParentCategoryName(Int64? parentCategoryId)
         {
             string parentCategoryName = string.Empty;
-            var result = ApplicationDbContext.Categories.Where(c => c.ParentCategoryId != null && c.ParentCategoryId == parentCategoryId).FirstOrDefault();
+            var result = ApplicationDbContext.Categories.Where(c => c.ParentId != null && c.ParentId == parentCategoryId).FirstOrDefault();
 
             if (result == null)
             {
@@ -86,7 +89,7 @@ namespace Application.Data.Repository
             }
             else
             {
-                parentCategoryName = ApplicationDbContext.Categories.Where(p => p.Id == result.ParentCategoryId).Select(pm => pm.Name).FirstOrDefault();
+                parentCategoryName = ApplicationDbContext.Categories.Where(p => p.Id == result.ParentId).Select(pm => pm.Name).FirstOrDefault();
             }
             return parentCategoryName;
         }
