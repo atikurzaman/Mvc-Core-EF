@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Application.Web.Areas.Admin.Models
 {
-    public class BrandViewModel : BaseEntityViewModel
+    public class TagViewModel : BaseEntityViewModel
     {
         [Required, MaxLength(256)]
         public string Name { get; set; }
 
-        [Required, DisplayName("Active")]
+        [DisplayName("Active"), Required()]
         public bool IsActive { get; set; }
     }
 }

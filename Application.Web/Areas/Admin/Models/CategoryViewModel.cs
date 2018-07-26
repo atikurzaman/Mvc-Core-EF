@@ -12,10 +12,16 @@ namespace Application.Web.Areas.Admin.Models
     public class CategoryViewModel:BaseEntityViewModel
     {        
 
-        [Required, DisplayName("Name")]
+        [Required, DisplayName("Name"),MaxLength(256)]
         public string Name { get; set; }
+
+        [MaxLength(256)]
         public string Slug { get; set; }
+
+        [MaxLength(256)]
         public string Description { get; set; }
+
+        [Required, DisplayName("Active")]
         public Boolean IsActive { get; set; }
 
         [DisplayName("Parent Category")]

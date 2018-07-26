@@ -14,6 +14,8 @@ namespace Application.Web.MappingDTO
             CreateMap<Menu, MenuViewModel>().ReverseMap();
             CreateMap<Category, CategoryViewModel>().ReverseMap();
             CreateMap<Brand, BrandViewModel>().ReverseMap();
+            CreateMap<Tag, TagViewModel>().ReverseMap();
+            CreateMap<Store, StoreViewModel>().ReverseMap();
             CreateMap<Domain.Attribute, AttributeViewModel>().ReverseMap();
             CreateMap<AttributeValue, AttributeValueViewModel>().ReverseMap();
         }

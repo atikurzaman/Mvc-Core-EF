@@ -15,7 +15,7 @@ namespace Application.Web.Areas.Admin.Models
         [Required, MaxLength(256)]
         public string Name { get; set; }
 
-        [Required]
+        [Required, DisplayName("Active")]
         public Boolean IsActive { get; set; }
 
         //[Required]
