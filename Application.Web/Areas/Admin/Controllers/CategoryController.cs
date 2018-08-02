@@ -64,7 +64,7 @@ namespace Application.Web.Areas.Admin.Controllers
 
         [HttpPost, ActionName("AddEditCategory")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddEditMenu(long? id, CategoryViewModel categoryViewModel)
+        public async Task<IActionResult> AddEditCategory(long? id, CategoryViewModel categoryViewModel)
         {
             try
             {
@@ -102,11 +102,13 @@ namespace Application.Web.Areas.Admin.Controllers
                 else
                 {
                     _logger.LogError(ce.Message, id);
+                    TempData["Message"] = ApplicationMessage.FailedToUpdateConcurrency;
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex.StackTrace);
+                TempData["Message"] = ApplicationMessage.Fail;
             }
 
             return RedirectToAction(nameof(Index));
@@ -144,6 +146,7 @@ namespace Application.Web.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex.StackTrace);
+                TempData["Message"] = ApplicationMessage.FailToDelete;
             }
 
             return RedirectToAction(nameof(Index));
