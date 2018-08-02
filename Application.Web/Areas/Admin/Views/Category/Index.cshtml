@@ -7,6 +7,13 @@
 }
 
 <div class="top-content-buffer"></div>
+@if (TempData["Message"] != null && TempData["Message"].ToString().Length > 0)
+{
+<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>@TempData["Message"].ToString()</strong> 
+</div>
+}
 <div class="table-responsive">
     <div class="panel-heading panel-head respo">Categories</div>
     <div class="panel-body">
@@ -21,32 +28,32 @@
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
-                    </th>                   
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.ParentCategoryName)
-                    </th>             
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>                    
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParentCategoryName)
-                    </td>          
-                    <td>
-                        <a id="editCategoryModal" data-toggle="modal" asp-action="AddEditCategory" asp-route-id="@item.Id" data-target="#modal-action-category"
-                           class="btn btn-info">
-                            <i class="glyphicon glyphicon-pencil"></i>  Edit
-                        </a>
-                        <a id="deleteCategoryModal" data-toggle="modal" asp-action="DeleteCategory" asp-route-id="@item.Id" data-target="#modal-action-category" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-trash"></i>  Delete
-                        </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentCategoryName)
+                        </td>
+                        <td>
+                            <a id="editCategoryModal" data-toggle="modal" asp-action="AddEditCategory" asp-route-id="@item.Id" data-target="#modal-action-category"
+                               class="btn btn-info">
+                                <i class="glyphicon glyphicon-pencil"></i>  Edit
+                            </a>
+                            <a id="deleteCategoryModal" data-toggle="modal" asp-action="DeleteCategory" asp-route-id="@item.Id" data-target="#modal-action-category" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-trash"></i>  Delete
+                            </a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>

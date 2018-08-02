@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Data.UnitOfWork;
 using Application.Domain;
+using Application.Utility;
 using Application.Web.Areas.Admin.Models;
 using Application.Web.Common;
 using AutoMapper;
@@ -43,17 +44,19 @@ namespace Application.Web.Areas.Admin.Controllers
                 var category = await _uow.Categories.GetAsync(id.Value);
                 if (category == null)
                 {
-                    _logger.LogInformation(LogMessageConstant.ItemNotFound, categoryViewModel);
+                    _logger.LogInformation(LogMessageConstant.ItemNotFound, typeof(Category), id);
                     return NotFound();
                 }
 
                 var categoryModel = _mapper.Map<CategoryViewModel>(category);
                 categoryViewModel = categoryModel;
                 categoryViewModel.CategorySelectList = new SelectList(_uow.Categories.CategorySelectList(), "Id", "Name", categoryModel.ParentId);
+                categoryViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", categoryModel.IsActive);
             }
             else
             {
                 categoryViewModel.CategorySelectList = new SelectList(_uow.Categories.CategorySelectList(), "Id", "Name", null);
+                categoryViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text","True");
             }
 
             return PartialView("~/Areas/Admin/Views/Category/_AddEditCategory.cshtml", categoryViewModel);
@@ -66,24 +69,25 @@ namespace Application.Web.Areas.Admin.Controllers
             try
             {
                 if (categoryViewModel == null)
-                {
-                    _logger.LogInformation(LogMessageConstant.ItemNotFound, categoryViewModel);
+                {                    
                     return NotFound();
                 }
                 if (ModelState.IsValid)
                 {
                     bool isNew = !id.HasValue;
                     if (isNew)
-                    {   
-                        var category = _mapper.Map<Category>(categoryViewModel);                       
+                    {
+                        var category = _mapper.Map<Category>(categoryViewModel);
                         await _uow.Categories.AddAsync(category);
-                        _logger.LogInformation(LogMessageConstant.Added, category.Name);
+                        _logger.LogInformation(LogMessageConstant.Added, typeof(Category), category.Name);
+                        TempData["Message"] = ApplicationMessage.Save;
                     }
                     else
                     {
                         var category = _mapper.Map<Category>(categoryViewModel);
                         await _uow.Categories.UpdateAsync(id.Value, category);
-                        _logger.LogInformation(LogMessageConstant.Updated, category.Name);
+                        _logger.LogInformation(LogMessageConstant.Updated, typeof(Category), category.Name);
+                        TempData["Message"] = ApplicationMessage.Update;
                     }
                 }
             }
@@ -92,7 +96,7 @@ namespace Application.Web.Areas.Admin.Controllers
                 var isExist = await _uow.Categories.GetAsync(id.Value);
                 if (isExist == null)
                 {
-                    _logger.LogWarning(LogMessageConstant.IdNotFound, id);
+                    _logger.LogWarning(LogMessageConstant.IdNotFound, typeof(Category), id);
                     return NotFound();
                 }
                 else
@@ -110,15 +114,14 @@ namespace Application.Web.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteCategory(long? id)
         {
             if (id == null)
-            {
-                _logger.LogWarning(LogMessageConstant.IdIsNull);
+            {                
                 return NotFound();
             }
 
             var category = await _uow.Categories.GetAsync(id.Value);
             if (category == null)
             {
-                _logger.LogWarning(LogMessageConstant.ItemNotFound, id);
+                _logger.LogWarning(LogMessageConstant.ItemNotFound, typeof(Category), id);
                 return NotFound();
             }
 
@@ -136,6 +139,7 @@ namespace Application.Web.Areas.Admin.Controllers
                 var category = await _uow.Categories.GetAsync(id);
                 await _uow.Categories.DeleteAsync(category.Id);
                 _logger.LogWarning(LogMessageConstant.Deleted, category.Id);
+                TempData["Message"] = ApplicationMessage.Delete;
             }
             catch (Exception ex)
             {
@@ -143,6 +147,19 @@ namespace Application.Web.Areas.Admin.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private List<SelectListItem> GetIsActiveSelectList()
+        {
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+
+            var items = new[]{
+                 new SelectListItem{ Value=true.ToString(),Text="Active"},
+                 new SelectListItem{ Value=false.ToString(),Text="Inactive"}
+             };
+
+            selectListItems = items.ToList();
+            return selectListItems;
         }
     }
 }

@@ -22,15 +22,16 @@ namespace Application.Web.Areas.Admin.Models
         public string Description { get; set; }
 
         [Required, DisplayName("Active")]
-        public Boolean IsActive { get; set; }
+        public Boolean IsActive { get; set; } = true;
 
         [DisplayName("Parent Category")]
         public Int64? ParentId { get; set; } = null;
-        public CategoryViewModel ChildCategory { get; set; }
-        public SelectList CategorySelectList { get; set; }
+        public CategoryViewModel ChildCategory { get; set; }      
 
         [DisplayName("Parent Category Name")]
         public string ParentCategoryName { get; set; }
         public List<CategoryViewModel> Children { get; set; }
+        public SelectList CategorySelectList { get; set; }
+        public SelectList IsActiveSelectList { get; set; }
     }
 }

@@ -10,41 +10,38 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="modal-body form-horizontal">
         <div class="form-group">
-            <label asp-for="Name" class="col-lg-3 col-sm-3 control-label"></label>
-            <div class="col-lg-6">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Slug" class="col-lg-3 col-sm-3 control-label"></label>
-            <div class="col-lg-6">
-                <input asp-for="Slug" class="form-control" />
-                <span asp-validation-for="Slug" class="text-danger"></span>
-            </div>
+            <label asp-for="Slug"></label>
+            <input asp-for="Slug" class="form-control" />
+            <span asp-validation-for="Slug" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ParentId" class="col-lg-3 col-sm-3 control-label"></label>
-            <div class="col-lg-6">
-                <select asp-for="ParentId" asp-items="@Model.CategorySelectList" class="form-control">
-                    <option value="">----Select----</option>
-                </select>
-            </div>
+            <label asp-for="ParentId"></label>
+            <select asp-for="ParentId" asp-items="@Model.CategorySelectList" class="form-control">
+                <option value="">----Select----</option>
+            </select>
+
         </div>
         <div class="form-group">
-            <label asp-for="Description" class="col-lg-3 col-sm-3 control-label"></label>
-            <div class="col-lg-6">
-                <textarea asp-for="Description" class="form-control" maxlength="256" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" maxlength="256" />
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
+        @*<div class="form-group">
+                <label asp-for="IsActive" class="col-lg-3 col-sm-3 control-label"></label>
+                <div class="checkbox col-lg-6">
+                    <label>
+                        <input asp-for="IsActive" />
+                    </label>
+                </div>
+            </div>*@
         <div class="form-group">
-            <label asp-for="IsActive" class="col-lg-3 col-sm-3 control-label"></label>
-            <div class="checkbox col-lg-6">
-                <label>
-                    <input asp-for="IsActive" />
-                </label>
-            </div>
+            <label asp-for="IsActive"></label>
+            <select asp-for="IsActive" asp-items="@Model.IsActiveSelectList" class="form-control"></select>
         </div>
     </div>
     @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
