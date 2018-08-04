@@ -4,14 +4,16 @@ using Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180804213946_Add ProductConfiguration")]
+    partial class AddProductConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -425,19 +427,6 @@ namespace Application.Data.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Application.Domain.ProductTag", b =>
-                {
-                    b.Property<long>("ProductId");
-
-                    b.Property<long>("TagId");
-
-                    b.HasKey("ProductId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("ProductTag");
-                });
-
             modelBuilder.Entity("Application.Domain.Tag", b =>
                 {
                     b.Property<long>("Id")
@@ -462,7 +451,11 @@ namespace Application.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<long?>("ProductId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Tag");
                 });
@@ -553,17 +546,11 @@ namespace Application.Data.Migrations
                         .HasForeignKey("ProductCategoryId");
                 });
 
-            modelBuilder.Entity("Application.Domain.ProductTag", b =>
+            modelBuilder.Entity("Application.Domain.Tag", b =>
                 {
-                    b.HasOne("Application.Domain.Product", "Product")
-                        .WithMany("ProductTags")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Application.Domain.Tag", "Tag")
-                        .WithMany("ProductTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Application.Domain.Product")
+                        .WithMany("Tags")
+                        .HasForeignKey("ProductId");
                 });
 #pragma warning restore 612, 618
         }

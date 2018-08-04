@@ -16,8 +16,10 @@ namespace Application.Data
         public DbSet<RoleClaim> RoleClaims { get; set; }
         public DbSet<Menu> Menus { get; set; }        
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Category> ProductAttributes { get; set; }
-        public DbSet<Category> ProductAttributeItems { get; set; }
+        public DbSet<Attribute> ProductAttributes { get; set; }
+        public DbSet<AttributeValue> ProductValues { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -39,6 +41,8 @@ namespace Application.Data
             builder.ApplyConfiguration(new BrandConfiguration());
             builder.ApplyConfiguration(new AttributeConfiguration());
             builder.ApplyConfiguration(new AttributeValueConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new ProductTagConfiguration());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

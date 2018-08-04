@@ -52,29 +52,42 @@ namespace Application.Data.UnitOfWork
             }
         }
 
-        private IAttributeRepository _productAttribute;
+        private IAttributeRepository _attribute;
         public IAttributeRepository Attributes
         {
             get
             {
-                if (_productAttribute == null)
+                if (_attribute == null)
                 {
-                    _productAttribute = new AttributeRepository(context);
+                    _attribute = new AttributeRepository(context);
                 }
-                return _productAttribute;
+                return _attribute;
             }
         }
 
-        private IAttributeValueRepository _productAttributeItem;
+        private IAttributeValueRepository _AttributeValue;
         public IAttributeValueRepository AttributeValues
         {
             get
             {
-                if (_productAttributeItem == null)
+                if (_AttributeValue == null)
                 {
-                    _productAttributeItem = new AttributeValueRepository(context);
+                    _AttributeValue = new AttributeValueRepository(context);
                 }
-                return _productAttributeItem;
+                return _AttributeValue;
+            }
+        }
+
+        private ITagRepository _tag;
+        public ITagRepository Tags
+        {
+            get
+            {
+                if (_tag == null)
+                {
+                    _tag = new TagRepository(context);
+                }
+                return _tag;
             }
         }
 

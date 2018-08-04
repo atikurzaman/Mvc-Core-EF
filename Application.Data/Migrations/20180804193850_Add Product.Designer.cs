@@ -4,14 +4,16 @@ using Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180804193850_Add Product")]
+    partial class AddProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -375,98 +377,6 @@ namespace Application.Data.Migrations
                     b.ToTable("Menu");
                 });
 
-            modelBuilder.Entity("Application.Domain.Product", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long?>("BrandId");
-
-                    b.Property<long>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(1024);
-
-                    b.Property<string>("IPAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("MacAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ProductCategoryId");
-
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("ProductCategoryId");
-
-                    b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Application.Domain.ProductTag", b =>
-                {
-                    b.Property<long>("ProductId");
-
-                    b.Property<long>("TagId");
-
-                    b.HasKey("ProductId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("ProductTag");
-                });
-
-            modelBuilder.Entity("Application.Domain.Tag", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("IPAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("MacAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tag");
-                });
-
             modelBuilder.Entity("Application.Domain.AttributeValue", b =>
                 {
                     b.HasOne("Application.Domain.Attribute", "Attribute")
@@ -540,30 +450,6 @@ namespace Application.Data.Migrations
                     b.HasOne("Application.Domain.Menu", "ParentMenu")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
-                });
-
-            modelBuilder.Entity("Application.Domain.Product", b =>
-                {
-                    b.HasOne("Application.Domain.Brand", "Brand")
-                        .WithMany()
-                        .HasForeignKey("BrandId");
-
-                    b.HasOne("Application.Domain.Category", "ProductCategory")
-                        .WithMany()
-                        .HasForeignKey("ProductCategoryId");
-                });
-
-            modelBuilder.Entity("Application.Domain.ProductTag", b =>
-                {
-                    b.HasOne("Application.Domain.Product", "Product")
-                        .WithMany("ProductTags")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Application.Domain.Tag", "Tag")
-                        .WithMany("ProductTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

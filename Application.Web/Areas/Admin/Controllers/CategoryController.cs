@@ -151,7 +151,6 @@ namespace Application.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
         private List<SelectListItem> GetIsActiveSelectList()
         {
             List<SelectListItem> selectListItems = new List<SelectListItem>();

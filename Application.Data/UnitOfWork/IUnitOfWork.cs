@@ -13,7 +13,7 @@ namespace Application.Data.UnitOfWork
         IBrandRepository Brands { get; }
         IAttributeRepository Attributes { get; }
         IAttributeValueRepository AttributeValues { get; }
-
+        ITagRepository Tags { get; }
         int Complete();
         Task<int> CompleteAsync();
     }

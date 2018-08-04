@@ -8,5 +8,6 @@ namespace Application.Domain
     {
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public ICollection<ProductTag> ProductTags { get; set; }
     }
 }
