@@ -4,14 +4,16 @@ using Application.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Application.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180805025452_Menu Modify")]
+    partial class MenuModify
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,22 +168,6 @@ namespace Application.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<long>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("IPAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("MacAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256);
@@ -229,28 +215,19 @@ namespace Application.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AccessFailedCount");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<long>("CreatedBy");
-
-                    b.Property<DateTime>("CreatedDate");
-
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256);
 
-                    b.Property<string>("IPAddress")
-                        .HasMaxLength(256);
+                    b.Property<bool>("EmailConfirmed");
 
-                    b.Property<bool>("IsActive");
+                    b.Property<bool>("LockoutEnabled");
 
-                    b.Property<string>("MacAddress")
-                        .HasMaxLength(256);
-
-                    b.Property<long?>("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate");
+                    b.Property<DateTimeOffset>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -258,14 +235,17 @@ namespace Application.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired();
+                    b.Property<string>("PasswordHash");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired();
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.HasKey("Id");

@@ -91,6 +91,19 @@ namespace Application.Data.UnitOfWork
             }
         }
 
+        private IRoleRepository _role;
+        public IRoleRepository Roles
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    _role = new RoleRepository(context);
+                }
+                return _role;
+            }
+        }
+
         public int Complete()
         {
             int result = 0;

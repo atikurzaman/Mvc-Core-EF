@@ -35,6 +35,6 @@ namespace Application.Web.Areas.Admin.Models
 
         [DisplayName("Parent Menu Name")]
         public string ParentMenuName { get; set; }
-        public List<MenuViewModel> Children { get; set; }
+        public ICollection<MenuViewModel> Children { get; set; }
     }
 }

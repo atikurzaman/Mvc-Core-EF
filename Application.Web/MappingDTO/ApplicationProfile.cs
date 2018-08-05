@@ -1,4 +1,5 @@
 ﻿using Application.Domain;
+using Application.Domain.Membership;
 using Application.Web.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Application.Web.MappingDTO
             CreateMap<Store, StoreViewModel>().ReverseMap();
             CreateMap<Domain.Attribute, AttributeViewModel>().ReverseMap();
             CreateMap<AttributeValue, AttributeValueViewModel>().ReverseMap();
+            CreateMap<Role, RoleViewModel>().ReverseMap();
         }
     }
 }

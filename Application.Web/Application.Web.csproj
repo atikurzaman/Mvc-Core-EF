@@ -52,6 +52,12 @@
     <Content Update="Areas\Admin\Views\Attribute\_DeleteAttribute.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Areas\Admin\Views\Role\_AddEditRole.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Admin\Views\Role\_DeleteRole.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Areas\Admin\Views\Shared\_GentelellaAdmin.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

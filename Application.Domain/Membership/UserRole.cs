@@ -8,14 +8,9 @@ namespace Application.Domain.Membership
 {    
     public class UserRole
     {   
-        //[Required, ForeignKey(nameof(User))]
         public Int64 UserId { get; set; }
-        
-        //[Required, ForeignKey(nameof(Role))]
+        public User User { get; set; }
         public Int64 RoleId { get; set; }
-
-        public virtual Role Role { get; set; }
-
-        public virtual User User { get; set; }
+        public Role Role { get; set; }        
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Data.UnitOfWork;
-using Application.Domain;
+using Application.Domain.Membership;
 using Application.Utility;
 using Application.Web.Areas.Admin.Models;
 using Application.Web.Common;
@@ -17,12 +17,12 @@ using Microsoft.Extensions.Logging;
 namespace Application.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TagController : BaseController
+    public class RoleController : BaseController
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
-        public TagController(IUnitOfWork uow, IMapper mapper, ILogger<TagController> logger)
+        public RoleController(IUnitOfWork uow, IMapper mapper, ILogger<RoleController> logger)
         {
             _uow = uow;
             _mapper = mapper;
@@ -30,42 +30,42 @@ namespace Application.Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Tag> tags = await _uow.Tags.GetAllAsync();
-            var tagViewModel = _mapper.Map<IEnumerable<TagViewModel>>(tags);
-            return View(tagViewModel);
+            IEnumerable<Role> roles = await _uow.Roles.GetAllAsync();
+            var roleViewModel = _mapper.Map<IEnumerable<RoleViewModel>>(roles);
+            return View(roleViewModel);
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddEditTag(long? id)
+        public async Task<IActionResult> AddEditRole(long? id)
         {
-            TagViewModel tagViewModel = new TagViewModel();
+            RoleViewModel roleViewModel = new RoleViewModel();
             if (id.HasValue)
             {
-                var tag = await _uow.Tags.GetAsync(id.Value);
-                if (tag == null)
+                var role = await _uow.Roles.GetAsync(id.Value);
+                if (role == null)
                 {
-                    _logger.LogInformation(LogMessageConstant.ItemNotFound, typeof(Tag), id);
+                    _logger.LogInformation(LogMessageConstant.ItemNotFound, typeof(Role), id);
                     return NotFound();
                 }
                 
-                tagViewModel = _mapper.Map<TagViewModel>(tag);                 
-                tagViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", tagViewModel.IsActive);
+                roleViewModel = _mapper.Map<RoleViewModel>(role);                 
+                roleViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", roleViewModel.IsActive);
             }
             else
             {                
-                tagViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", "True");
+                roleViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", "True");
             }
 
-            return PartialView("~/Areas/Admin/Views/Tag/_AddEditTag.cshtml", tagViewModel);
+            return PartialView("~/Areas/Admin/Views/Role/_AddEditRole.cshtml", roleViewModel);
         }
 
-        [HttpPost, ActionName("AddEditTag")]
+        [HttpPost, ActionName("AddEditRole")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddEditTag(long? id, TagViewModel tagViewModel)
+        public async Task<IActionResult> AddEditRole(long? id, RoleViewModel roleViewModel)
         {
             try
             {
-                if (tagViewModel == null)
+                if (roleViewModel == null)
                 {
                     return NotFound();
                 }
@@ -74,26 +74,26 @@ namespace Application.Web.Areas.Admin.Controllers
                     bool isNew = !id.HasValue;
                     if (isNew)
                     {
-                        var tag = _mapper.Map<Tag>(tagViewModel);
-                        await _uow.Tags.AddAsync(tag);
-                        _logger.LogInformation(LogMessageConstant.Added, typeof(Tag), tag.Name);
+                        var role = _mapper.Map<Role>(roleViewModel);
+                        await _uow.Roles.AddAsync(role);
+                        _logger.LogInformation(LogMessageConstant.Added, typeof(Role), role.Name);
                         TempData["Message"] = ApplicationMessage.Save;
                     }
                     else
                     {
-                        var tag = _mapper.Map<Tag>(tagViewModel);
-                        await _uow.Tags.UpdateAsync(id.Value, tag);
-                        _logger.LogInformation(LogMessageConstant.Updated, typeof(Tag), tag.Name);
+                        var role = _mapper.Map<Role>(roleViewModel);
+                        await _uow.Roles.UpdateAsync(id.Value, role);
+                        _logger.LogInformation(LogMessageConstant.Updated, typeof(Role), role.Name);
                         TempData["Message"] = ApplicationMessage.Update;
                     }
                 }
             }
             catch (DbUpdateConcurrencyException ce)
             {
-                var isExist = await _uow.Tags.GetAsync(id.Value);
+                var isExist = await _uow.Roles.GetAsync(id.Value);
                 if (isExist == null)
                 {
-                    _logger.LogWarning(LogMessageConstant.IdNotFound, typeof(Tag), id);
+                    _logger.LogWarning(LogMessageConstant.IdNotFound, typeof(Role), id);
                     return NotFound();
                 }
                 else
@@ -110,34 +110,34 @@ namespace Application.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> DeleteTag(long? id)
+        public async Task<IActionResult> DeleteRole(long? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tag = await _uow.Tags.GetAsync(id.Value);
-            if (tag == null)
+            var role = await _uow.Roles.GetAsync(id.Value);
+            if (role == null)
             {
-                _logger.LogWarning(LogMessageConstant.ItemNotFound, typeof(Tag), id);
+                _logger.LogWarning(LogMessageConstant.ItemNotFound, typeof(Role), id);
                 return NotFound();
             }
 
-            var tagViewModel = _mapper.Map<TagViewModel>(tag);
-            string tagName = tagViewModel.Name;
-            return PartialView("~/Areas/Admin/Views/Tag/_DeleteTag.cshtml", model: tagName);
+            var roleViewModel = _mapper.Map<RoleViewModel>(role);
+            string roleName = roleViewModel.Name;
+            return PartialView("~/Areas/Admin/Views/Role/_DeleteRole.cshtml", model: roleName);
         }
 
-        [HttpPost, ActionName("DeleteTag")]
+        [HttpPost, ActionName("DeleteRole")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteTag(long id, IFormCollection form)
+        public async Task<IActionResult> DeleteRole(long id, IFormCollection form)
         {
             try
             {
-                var tag = await _uow.Tags.GetAsync(id);
-                await _uow.Tags.DeleteAsync(tag.Id);
-                _logger.LogWarning(LogMessageConstant.Deleted, tag.Id);
+                var role = await _uow.Roles.GetAsync(id);
+                await _uow.Roles.DeleteAsync(role.Id);
+                _logger.LogWarning(LogMessageConstant.Deleted, role.Id);
                 TempData["Message"] = ApplicationMessage.Delete;
             }
             catch (Exception ex)

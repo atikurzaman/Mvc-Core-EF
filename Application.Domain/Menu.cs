@@ -18,7 +18,7 @@ namespace Application.Domain
         [ForeignKey(nameof(ParentMenu))]
         public Int64? ParentId { get; set; }
         public Menu ParentMenu { get; set; }
-        public List<Menu> Children { get; set; }
+        public ICollection<Menu> Children { get; set; }
 
         [NotMapped]
         public string ParentMenuName { get; set; }

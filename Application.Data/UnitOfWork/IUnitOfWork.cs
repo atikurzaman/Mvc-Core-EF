@@ -14,6 +14,7 @@ namespace Application.Data.UnitOfWork
         IAttributeRepository Attributes { get; }
         IAttributeValueRepository AttributeValues { get; }
         ITagRepository Tags { get; }
+        IRoleRepository Roles { get; }
         int Complete();
         Task<int> CompleteAsync();
     }

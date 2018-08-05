@@ -54,7 +54,7 @@ namespace Application.Web.Areas.Admin.Controllers
             {
                 brandViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", "True");
             }
-            
+
             return PartialView("~/Areas/Admin/Views/Brand/_AddEditBrand.cshtml", brandViewModel);
         }
 

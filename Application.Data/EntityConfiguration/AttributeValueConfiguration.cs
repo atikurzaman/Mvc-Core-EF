@@ -7,14 +7,18 @@ using System.Text;
 
 namespace Application.Data.EntityConfiguration
 {
-    public class AttributeValueConfiguration:IEntityTypeConfiguration<AttributeValue>
+    public class AttributeValueConfiguration : IEntityTypeConfiguration<AttributeValue>
     {
         public void Configure(EntityTypeBuilder<AttributeValue> builder)
         {
-            builder.Property(c => c.Id).ValueGeneratedOnAdd();
-            builder.Property(c => c.Name).HasMaxLength(256).IsRequired();            
-            builder.Property(c => c.IsActive).IsRequired();
+            builder.Property(av => av.Id).ValueGeneratedOnAdd();
+            builder.Property(av => av.Name).HasMaxLength(256).IsRequired();
+            builder.Property(av => av.IsActive).IsRequired();
             builder.ToTable("AttributeValue");
+
+            //builder.HasOne(a => a.Attribute)
+            //.WithMany(av => av.AttributeValues)
+            //.HasForeignKey(a => a.AttributeId);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Application.Data.EntityConfiguration
             builder.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
             builder.Property(r => r.Name).HasMaxLength(256).IsRequired();
             builder.Property(r => r.NormalizedName).HasMaxLength(256).IsRequired();
+            builder.Property(r => r.IsActive).IsRequired();
             builder.HasKey(r => r.Id);
 
             builder.HasIndex(r=>r.NormalizedName)
