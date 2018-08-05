@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Data.UnitOfWork;
 using Application.Domain;
+using Application.Utility;
 using Application.Web.Areas.Admin.Models;
 using Application.Web.Common;
 using AutoMapper;
@@ -46,9 +47,14 @@ namespace Application.Web.Areas.Admin.Controllers
                     return NotFound();
                 }
 
-                brandViewModel = _mapper.Map<BrandViewModel>(brand);                  
-            }           
-
+                brandViewModel = _mapper.Map<BrandViewModel>(brand);
+                brandViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", brandViewModel.IsActive);
+            }
+            else
+            {
+                brandViewModel.IsActiveSelectList = new SelectList(GetIsActiveSelectList(), "Value", "Text", "True");
+            }
+            
             return PartialView("~/Areas/Admin/Views/Brand/_AddEditBrand.cshtml", brandViewModel);
         }
 
@@ -71,12 +77,14 @@ namespace Application.Web.Areas.Admin.Controllers
                         var brand = _mapper.Map<Brand>(brandViewModel);
                         await _uow.Brands.AddAsync(brand);
                         _logger.LogInformation(LogMessageConstant.Added, brand.Name);
+                        TempData["Message"] = ApplicationMessage.Save;
                     }
                     else
                     {
                         var brand = _mapper.Map<Brand>(brandViewModel);
                         await _uow.Brands.UpdateAsync(id.Value, brand);
                         _logger.LogInformation(LogMessageConstant.Updated, brand.Name);
+                        TempData["Message"] = ApplicationMessage.Update;
                     }
                 }
             }
@@ -91,11 +99,13 @@ namespace Application.Web.Areas.Admin.Controllers
                 else
                 {
                     _logger.LogError(ce.Message, id);
+                    TempData["Message"] = ApplicationMessage.FailedToUpdateConcurrency;
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex.StackTrace);
+                TempData["Message"] = ApplicationMessage.Fail;
             }
 
             return RedirectToAction(nameof(Index));
@@ -129,13 +139,27 @@ namespace Application.Web.Areas.Admin.Controllers
                 var brand = await _uow.Brands.GetAsync(id);
                 await _uow.Brands.DeleteAsync(brand.Id);
                 _logger.LogWarning(LogMessageConstant.Deleted, brand.Id);
+                TempData["Message"] = ApplicationMessage.Delete;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex.StackTrace);
+                TempData["Message"] = ApplicationMessage.FailToDelete;
             }
 
             return RedirectToAction(nameof(Index));
+        }
+        private List<SelectListItem> GetIsActiveSelectList()
+        {
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+
+            var items = new[]{
+                 new SelectListItem{ Value=true.ToString(),Text="Active"},
+                 new SelectListItem{ Value=false.ToString(),Text="Inactive"}
+             };
+
+            selectListItems = items.ToList();
+            return selectListItems;
         }
     }
 }

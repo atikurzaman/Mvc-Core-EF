@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -14,5 +15,6 @@ namespace Application.Web.Areas.Admin.Models
 
         [Required, DisplayName("Active")]
         public bool IsActive { get; set; }
+        public SelectList IsActiveSelectList { get; set; }
     }
 }

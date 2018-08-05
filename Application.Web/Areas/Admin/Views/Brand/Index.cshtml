@@ -7,6 +7,13 @@
 }
 
 <div class="top-content-buffer"></div>
+@if (TempData["Message"] != null && TempData["Message"].ToString().Length > 0)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>@TempData["Message"].ToString()</strong>
+    </div>
+}
 <div class="table-responsive">
     <div class="panel-heading panel-head respo">Brands</div>
     <div class="panel-body">
