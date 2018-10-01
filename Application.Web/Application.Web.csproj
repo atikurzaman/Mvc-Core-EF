@@ -38,7 +38,7 @@
       <HintPath>..\Application.Domain\bin\Debug\netcoreapp2.1\Application.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Application.Utility">
-      <HintPath>..\Application.Utility\bin\Debug\netcoreapp2.1\Application.Utility.dll</HintPath>
+      <HintPath>..\Application.Domain\bin\Debug\netcoreapp2.1\Application.Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
 
